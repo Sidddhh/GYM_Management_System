@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Member</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://paramountacceptance.com/wp-content/uploads/blog-images-7.png'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            color: #333; /* Dark text color for contrast */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark header background */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em; /* Increased font size */
+            color: #fff; /* White text for header */
+        }
+
+        section {
+            max-width: 500px; /* Set max width for the form container */
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9); /* Slightly opaque background for readability */
+            padding: 30px; /* Increased padding */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Register Member</h1>
+        <a href="{{ url_for('dashboard') }}" style="color: #fff;">Back to Dashboard</a>
+    </header>
+
+    <section>
+        <form method="POST" action="{{ url_for('register_member') }}">
+            <input type="text" name="name" placeholder="Name" required />
+            <input type="text" name="surname" placeholder="Surname" required />
+            <input type="number" name="age" placeholder="Age" required />
+            <input type="text" name="address" placeholder="Address" required />
+            <input type="text" name="mobile" placeholder="Mobile No." required />
+            <input type="email" name="email" placeholder="Email" required />
+            <select name="plan_id" required>
+                <option value="">Select Plan</option>
+                {% for plan in plans %}
+                    <option value="{{ plan.id }}">{{ plan.plan_name }} (₹{{ plan.price }})</option>
+                {% endfor %}
+            </select>
+            <label>Payment:</label>
+            <select name="payment_method" required>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+            </select>
+            <button type="submit">Make Payment</button>
+        </form>
+    </section>
+</body>
+</html>

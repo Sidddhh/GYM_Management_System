@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            background-color: black; /* Added black background */
+            color: white; /* Default text color for readability */
+        }
+
+        /* Navigation Bar */
+        .header {
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        .nav__logo {
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid black;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav__logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .nav__menu ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        .nav__item {
+            margin-left: 20px;
+        }
+        .nav__link {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+        .nav__link:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        /* Main Section */
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            background: url('https://img.freepik.com/free-photo/3d-gym-equipment_23-2151114152.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh; /* Full viewport height */
+            color: white;
+            text-align: center;
+        }
+        .home__content {
+            max-width: 500px;
+        }
+        .home__content h1 {
+            font-size: 60px; /* Increased font size */
+            margin-bottom: 10px;
+        }
+        .home__content p {
+            margin: 20px 0;
+            font-size: 22px; /* Increased font size */
+        }
+        .home__button {
+            padding: 10px 20px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .home__button:hover {
+            background-color: #ff4d4d;
+        }
+
+        /* About Us Section */
+        .aboutus {
+            padding: 70px 20px;
+            background: url('https://img.freepik.com/free-photo/3d-gym-equipment_23-2151114152.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            min-height: 100vh; /* Full viewport height */
+        }
+        .aboutus h2 {
+            font-size: 48px; /* Increased font size */
+            margin-bottom: 20px;
+        }
+        .aboutus p {
+            max-width: 800px;
+            margin: auto;
+            color: #ddd;
+            font-size: 20px; /* Increased font size */
+        }
+
+        /* Pricing Plans Section */
+        .plans {
+            padding: 50px 20px;
+            background-color: #000;
+            color: white;
+            text-align: center;
+        }
+        .plans h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .plans__content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .plan__item {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .plan__item img {
+            border-radius: 50%;
+            border: 4px solid black;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        .plan__item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Us Section */
+        .contact {
+            padding: 50px 20px;
+            background-color: #111;
+            color: white;
+            text-align: center;
+        }
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .contact__info {
+            max-width: 600px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two fields per row */
+            gap: 20px;
+            align-items: center;
+        }
+        .contact__info div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact__info img {
+            width: 24px; /* Icon size */
+            height: 24px;
+            margin-right: 10px; /* Spacing between icon and text */
+        }
+        .contact__info a {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact__info a:hover {
+            color: #ff4d4d;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            background-color: #333;
+            text-align: center;
+            color: white;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* Responsive Background */
+        @media (max-width: 768px) {
+            .home {
+                height: 60vh; /* Adjusted height for mobile */
+            }
+            .aboutus {
+                padding: 50px 10px;
+                min-height: 60vh; /* Adjusted height for mobile */
+            }
+            .plans__content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .plan__item {
+                width: 90%;
+                height: auto;
+            }
+            .contact__info {
+                grid-template-columns: 1fr; /* One field per row on small screens */
+            }
+        }
+    </style>
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <img src="https://cdn.pixabay.com/photo/2024/01/10/05/32/ai-generated-8498914_640.jpg" alt="logo" />
+            </a>
+            <div class="nav__menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="#aboutus" class="nav__link">About Us</a></li>
+                    <li class="nav__item"><a href="#plans" class="nav__link">Plans</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact Us</a></li>
+                    <li class="nav__item"><a href="/login" class="nav__link">Register/Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <section class="home container" id="home">
+        <div class="home__content">
+            <h1>Welcome to Our Fitness Center</h1>
+            <p>Join us to achieve your fitness goals and transform your life.</p>
+            <a href="#" class="home__button">Join Now</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="aboutus container" id="aboutus">
+        <h2>About Us</h2>
+        <p>Our fitness center offers world-class equipment, certified trainers, and personalized programs to help you achieve your fitness goals. Whether you want to build strength, improve your endurance, or just stay healthy, we have the right program for you.</p>
+    </section>
+
+    <!-- Pricing Plans Section -->
+    <section class="plans container" id="plans">
+        <h2>Pricing Plans</h2>
+        <div class="plans__content">
+            <div class="plan__item">
+                <img src="https://st5.depositphotos.com/71499868/69644/v/450/depositphotos_696448222-stock-illustration-barbell-icon-vector-illustration-logo.jpg" alt="Plan 1" />
+                <h3>Basic Plan</h3>
+                <p>₹1000/month</p>
+            </div>
+            <div class="plan__item">
+                <img src="https://st2.depositphotos.com/3931647/6764/v/450/depositphotos_67640383-stock-illustration-kettlebell-and-dumbbell-with-baner.jpg" alt="Plan 2" />
+                <h3>Premium Plan</h3>
+                <p>₹2000/month</p>
+            </div>
+            <div class="plan__item">
+                <img src="https://img.freepik.com/premium-vector/logo-gym-shows-words-fitness-fitness_666870-9712.jpg" alt="Plan 3" />
+                <h3>Ultimate Plan</h3>
+                <p>₹3000/month</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact container" id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact__info">
+            <div>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/email-sign.png" alt="Email Icon" />
+                <a href="mailto:spmd1234@gmail.com">spmd1234@gmail.com</a>
+            </div>
+            <div>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp Icon" />
+                <a href="https://wa.me/11234567890">+91 8967453421</a>
+            </div>
+            <div>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/phone.png" alt="Phone Icon" />
+                <a href="tel:+911234567890">+91 8967453421</a>
+            </div>
+            <div>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram Icon" />
+                <a href="https://instagram.com/fitnesscenter" target="_blank">@fitnesscenter</a>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="footer container">
+        <p>&copy; 2024 Fitness Center. All rights reserved.</p>
+    </footer>
+
+    <!-- Background Image Switcher -->
+    <script>
+        const backgrounds = [
+            'https://img.freepik.com/premium-photo/gym-equipment-dark-background-cross-gym_1047188-2987.jpg',
+            'https://img.freepik.com/premium-photo/gym-equipment-dark-background-cross-gym_1047188-2986.jpg?w=360',
+            'https://png.pngtree.com/thumb_back/fw800/background/20230720/pngtree-3d-rendered-gym-equipment-on-a-dark-background-image_3763737.jpg'
+        ];
+        let currentIndex = 0;
+        const homeSection = document.querySelector('.home');
+
+        function changeBackground() {
+            currentIndex = (currentIndex + 1) % backgrounds.length;
+            homeSection.style.backgroundImage = `url('${backgrounds[currentIndex]}')`;
+        }
+
+        setInterval(changeBackground, 3000); // Change background every 3 seconds
+    </script>
+</body>
+</html>

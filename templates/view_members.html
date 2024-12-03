@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Members</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.shutterstock.com/image-photo/barbell-fitness-training-gym-sports-600nw-2139742761.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #fff;
+        }
+
+        section {
+            max-width: 1200px; /* Increased max-width for wider container */
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        table {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse; /* Remove gaps between cells */
+        }
+
+        th, td {
+            border: 1px solid #ccc; /* Border for table cells */
+            padding: 10px; /* Padding inside cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Light gray background for header */
+        }
+
+        tr:hover {
+            background-color: #f0f0f0; /* Light gray hover effect */
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>View Members</h1>
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </header>
+
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Plan</th>
+                    <th>Payment Method</th>
+                    <th>Registration Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                    <tr>
+                        <td>{{ member.name }} {{ member.surname }}</td>
+                        <td>{{ member.age }}</td>
+                        <td>{{ member.address }}</td>
+                        <td>{{ member.mobile }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.plan_name }}</td>
+                        <td>{{ member.payment_method }}</td>
+                        <td>{{ member.registration_date }}</td>
+                        <td>
+                            <form method="POST" action="/remove_member" style="margin: 0;">
+                                <input type="hidden" name="member_id" value="{{ member.id }}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

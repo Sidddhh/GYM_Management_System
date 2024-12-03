@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.shutterstock.com/image-illustration/gym-weights-under-strong-dramatic-600nw-472696720.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            color: #fff; /* Change text color to white for better contrast */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #sales-report {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            color: #333; /* Dark text for better readability */
+        }
+
+        h1, h2, h3 {
+            color: #333; /* Dark color for headings */
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="date"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            width: calc(50% - 10px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2; /* Light gray for table header */
+            color: #333; /* Dark text for header */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Light background for even rows */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Highlight on hover */
+        }
+
+        .back-button {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+        }
+
+        .back-button a {
+            text-decoration: none; /* Remove underline */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sales Report</h1>
+    </header>
+
+    <section id="sales-report">
+        <h2>Sales Overview</h2>
+        <form method="POST" action="/sales_report">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required />
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required />
+            <button type="submit">Generate Report</button>
+        </form>
+
+        <h3>Total Registrations: {{ total_registrations }}</h3>
+        <h3>Total Earnings: ₹{{ total_earnings }}</h3>
+
+        <h3>Registration Details</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Member Name</th>
+                    <th>Email</th>
+                    <th>Plan</th>
+                    <th>Payment Method</th>
+                    <th>Registration Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registration in registrations %}
+                <tr>
+                    <td>{{ registration.name }}</td>
+                    <td>{{ registration.email }}</td>
+                    <td>{{ registration.plan }}</td>
+                    <td>{{ registration.payment_method }}</td>
+                    <td>{{ registration.registration_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="back-button">
+            <a href="{{ url_for('dashboard') }}">
+                <button>Back to Dashboard</button>
+            </a>
+        </div>
+    </section>
+</body>
+</html>

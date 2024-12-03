@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Plans</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230519/pngtree-an-old-gym-setting-with-dumbbells-image_2569910.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            color: #fff; /* Text color for contrast */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Darker header background */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em; /* Increased font size */
+        }
+
+        section {
+            max-width: 600px; /* Optimized max width for the container */
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9); /* Slightly opaque background for readability */
+            padding: 30px; /* Increased padding */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333; /* Dark text for labels */
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        h3 {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333; /* Dark text for headings */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #444; /* Dark background for the table */
+            border-radius: 5px; /* Rounded corners for the table */
+            overflow: hidden; /* To ensure rounded corners are visible */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #666; /* Darker border for better visibility */
+            color: #fff; /* White text for better contrast */
+        }
+
+        th {
+            background-color: #555; /* Darker header for better contrast */
+        }
+
+        tr:hover {
+            background-color: #666; /* Lighter gray hover effect */
+        }
+
+        button[type="submit"] {
+            background: #e74c3c; /* Red color for remove button */
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: #c0392b; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Add Plans</h1>
+        <a href="{{ url_for('dashboard') }}" style="text-decoration: none; color: #fff;">Back to Dashboard</a>
+    </header>
+
+    <section>
+        <form method="POST" action="{{ url_for('add_plans') }}">
+            <label for="plan_name">Plan Name:</label>
+            <input type="text" id="plan_name" name="plan_name" required />
+
+            <label for="plan_duration">Plan Duration (months):</label>
+            <input type="number" id="plan_duration" name="plan_duration" required />
+
+            <label for="plan_price">Plan Price (₹):</label>
+            <input type="number" id="plan_price" name="plan_price" step="0.01" required />
+
+            <button type="submit">Add Plan</button>
+        </form>
+
+        <h3>Existing Plans</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Plan Name</th>
+                    <th>Duration (months)</th>
+                    <th>Price (₹)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plan in plans %}
+                    <tr>
+                        <td>{{ plan.name }}</td>
+                        <td>{{ plan.duration }}</td>
+                        <td>₹{{ plan.price }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('delete_plan') }}" style="display:inline;">
+                                <input type="hidden" name="plan_id" value="{{ plan.id }}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

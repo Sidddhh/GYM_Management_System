@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/premium-photo/interior-fitness-hall-with-equipment-shallow-depth-field_1308175-56469.jpg?semt=ais_hybrid');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff; /* White text for better contrast */
+        }
+
+        .profile-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 1); /* Fully opaque background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #000; /* Black border */
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333; /* Darker color for better readability */
+        }
+
+        .username {
+            font-size: 1.5em; /* Larger font size for username */
+            margin-bottom: 10px;
+            color: #007bff; /* Blue color for username */
+        }
+
+        p {
+            margin: 5px 0;
+            color: #222; /* Darker gray for better contrast */
+        }
+
+        .update-password-form,
+        .update-email-form {
+            margin: 20px 0;
+        }
+
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        a {
+            display: block;
+            margin: 10px 0;
+            color: #ffffff; /* White text for better contrast */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Profile</h1>
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </header>
+
+    <section class="profile-container">
+        <div class="profile-image">
+            <img src="https://marketplace.canva.com/EAFxdcos7WU/1/0/1600w/canva-dark-blue-and-brown-illustrative-fitness-gym-logo-oqe3ybeEcQQ.jpg" alt="Profile Image" />
+        </div>
+        <div class="username"><strong>{{ user['username'] }}</strong></div>
+        <p>Email: <strong>{{ user['email'] }}</strong></p>
+
+        <!-- Update Password Form -->
+        <form method="POST" class="update-password-form">
+            <h3>Update Password</h3>
+            <input type="password" name="new_password" placeholder="New Password" required />
+            <button type="submit" name="update_password">Update Password</button>
+        </form>
+
+        <!-- Update Email Form -->
+        <form method="POST" class="update-email-form">
+            <h3>Update Email</h3>
+            <input type="email" name="new_email" placeholder="New Email" required />
+            <button type="submit" name="update_email">Update Email</button>
+        </form>
+    </section>
+</body>
+</html>
