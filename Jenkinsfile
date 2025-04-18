@@ -14,13 +14,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                bat 'pip install --upgrade pip'
                 bat 'pip install -r requirements.txt'
             }
         }
 
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                bat 'pytest || echo No tests found'
+                bat 'pytest'
             }
         }
 
@@ -32,6 +33,15 @@ pipeline {
                 docker push %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
                 """
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check logs above.'
         }
     }
 }
