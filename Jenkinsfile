@@ -14,13 +14,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install --upgrade pip'
-                bat 'pip install -r requirements.txt'
+                // Install requirements locally for testing — use --user for permission issues
+                bat 'pip install --user -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
+                // Run pytest — now that you have test_dummy.py, this will pick it up
                 bat 'pytest'
             }
         }
@@ -38,10 +39,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo '✅ Pipeline completed successfully!'
         }
         failure {
-            echo 'Pipeline failed. Check logs above.'
+            echo '❌ Pipeline failed. Check logs above.'
         }
     }
 }
