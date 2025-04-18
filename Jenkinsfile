@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USERNAME = credentials('siddhug45')
-        DOCKERHUB_PASSWORD = credentials('Siddhu@45')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
     }
 
     stages {
@@ -28,9 +27,9 @@ pipeline {
         stage('Docker Build & Push') {
             steps {
                 bat """
-                echo %DOCKERHUB_PASSWORD% | docker login -u %DOCKERHUB_USERNAME% --password-stdin
-                docker build -t %DOCKERHUB_USERNAME%/gym-management-app:latest .
-                docker push %DOCKERHUB_USERNAME%/gym-management-app:latest
+                echo %DOCKERHUB_CREDENTIALS_PSW% | docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
+                docker build -t %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest .
+                docker push %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
                 """
             }
         }
