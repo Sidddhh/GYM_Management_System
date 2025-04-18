@@ -1,18 +1,22 @@
-# Use official Python image
+# Use official Python slim image
 FROM python:3.10-slim
 
-# Set working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy everything from your project to the container
+# Avoid buffering logs (good for Docker logs)
+ENV PYTHONUNBUFFERED=1
+
+# Copy requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Copy the entire app code into the container
 COPY . .
 
-# Install dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
-# Expose port (Flask runs on 5000)
+# Expose Flask’s default port
 EXPOSE 5000
 
-# Run the Flask app
+# Default command to run the Flask app
 CMD ["python", "app.py"]
