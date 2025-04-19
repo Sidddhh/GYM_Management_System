@@ -32,6 +32,8 @@ pipeline {
         echo %DOCKERHUB_CREDENTIALS_PSW% | docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
         
         docker build -t %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest .
+        
+        docker pull your-dockerhub-username/gym-management-app:latest
 
         docker run -d --name gym_management_container -p 5000:5000 %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
 
