@@ -26,14 +26,20 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
-            steps {
-                bat """
-                echo %DOCKERHUB_CREDENTIALS_PSW% | docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
-                docker build -t %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest .
-                docker push %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
-                """
-            }
+        stage('Docker Build, Run & Push') {
+    steps {
+        bat """
+        echo %DOCKERHUB_CREDENTIALS_PSW% | docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
+        
+        docker build -t %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest .
+
+        docker run -d --name gym_management_container -p 5000:5000 %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
+
+        docker push %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
+        """
+    }
+}
+
         }
     }
 
