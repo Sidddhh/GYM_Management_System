@@ -27,8 +27,8 @@ pipeline {
         }
 
         stage('Docker Build, Run & Push') {
-    steps {
-        bat """
+            steps {
+                        bat """
         echo %DOCKERHUB_CREDENTIALS_PSW% | docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
         
         docker build -t %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest .
@@ -37,9 +37,8 @@ pipeline {
 
         docker push %DOCKERHUB_CREDENTIALS_USR%/gym-management-app:latest
         """
-    }
-}
 
+            }
         }
     }
 
